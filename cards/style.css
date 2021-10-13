@@ -7,7 +7,7 @@ body, body * {
 }
 
 body {
-  background-color: darkslategray;
+  background-color: rgb(67, 141, 141);
   color: white;
   font-family: 'Noto Serif', serif;
 }
@@ -17,12 +17,14 @@ h1 {
 }
 
 div.card {
+  /* position: "absolute" (on se libère du layout classique) */
   position: absolute;
   width: 200px;
   height: 200px;
+
+  background-color: white;
   font-size: 120px;
   border-radius: 4px;
-  background-color: white;
 
   /* centrer le contenu: */
   display: flex;
@@ -30,5 +32,7 @@ div.card {
   align-items: center;
 
   /* ombre portée */
-  box-shadow: #0000008a -1px 1px 40px;
+  box-shadow: #0000008a 0px 8px 40px;
+  user-select: none;
+  cursor: pointer;
 }
