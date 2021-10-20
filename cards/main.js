@@ -1,3 +1,22 @@
+
+const getRandomClassName = () => {
+  const r = Math.random()
+  // 20% de chance de retourner "silver"
+  if (r < 0.2) {
+    return 'silver'
+  }
+  // 10% (30 - 20) de chance de retourner "gold"
+  if (r < 0.3) {
+    return 'gold'
+  }
+  // dans tous les autres cas renvoyer ""
+  return 'normal'
+}
+
+const getRandomEmoji = () => {
+  return '🎨'
+}
+
 const clone = (source) => {
   const clone = source.cloneNode(true)
   document.body.append(clone)
@@ -8,6 +27,11 @@ const clone = (source) => {
   clone.style.top = y + 'px'
   const angle = Math.round(Math.random() * 60 - 30)
   clone.style.transform = `rotate(${angle}deg)`
+
+  const randomClass = getRandomClassName()
+  clone.className = `card ${randomClass}`
+
+  clone.querySelector('div').innerHTML = getRandomEmoji()
 }
 
 const cloneOnClick = (event) => {
