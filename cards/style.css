@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-@import url('fontawesome/css/all.css');
 
 body, body * {
   margin: 0;
@@ -11,6 +10,7 @@ body {
   background-color: rgb(67, 141, 141);
   color: white;
   font-family: 'Noto Serif', serif;
+  overflow: hidden;
 }
 
 h1 {
@@ -20,6 +20,8 @@ h1 {
 div.card {
   /* position: "absolute" (on se libère du layout classique) */
   position: absolute;
+}
+div.card > div {
   width: 200px;
   height: 200px;
 
@@ -36,6 +38,13 @@ div.card {
   box-shadow: #0000008a 0px 8px 40px;
   user-select: none;
   cursor: pointer;
+
+  /* animation */
+  transition: all 0.2s cubic-bezier(0, 0, 0.15, 1);
+}
+
+div.card > div:hover {
+  transform: scale(110%);
 }
 
 div.card i {

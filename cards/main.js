@@ -6,7 +6,7 @@ const clone = (source) => {
   const y = Math.round(Math.random() * window.innerHeight)
   clone.style.left = x + 'px'
   clone.style.top = y + 'px'
-  const angle = Math.round(Math.random() * 60)
+  const angle = Math.round(Math.random() * 60 - 30)
   clone.style.transform = `rotate(${angle}deg)`
 }
 
