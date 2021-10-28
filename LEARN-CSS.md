@@ -19,3 +19,8 @@ Pour en faire usage, il faut utiliser la syntaxe `var()`, ex :
 
 [Pour en savoir, voir la documentation sur MDN.](https://developer.mozilla.org/fr/docs/Web/CSS/Using_CSS_custom_properties)
 
+## Box-sizing
+`box-sizing` est une propriété css complexe déterminant la façon dont est calculé 
+la taille des éléments d'une page web.
+
+[Voir MDN pour en savoir plus.](https://developer.mozilla.org/fr/docs/Web/CSS/box-sizing)
