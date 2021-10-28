@@ -22,7 +22,7 @@ body {
 main#grid {
   width: calc(var(--grid-col) * var(--tile-size));
   height: calc(var(--grid-row) * var(--tile-size));
-  border: solid red 80px;
+  border: solid #0003 2px;
   box-sizing: content-box;
 }
 
@@ -30,5 +30,18 @@ div.tile {
   position: absolute;
   width: var(--tile-size);
   height: var(--tile-size);
+}
+
+div.tile-content {
+  width: var(--tile-size);
+  height: var(--tile-size);
   background-color: white;
+}
+
+div#library {
+  position: absolute;
+  /* z-index: forcer la div à s'afficher au premier plan */
+  z-index: 1;
+  top: 0;
+  left: 0;
 }
