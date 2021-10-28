@@ -23,7 +23,7 @@ body {
 main#grid {
   width: calc(var(--grid-col) * var(--tile-size));
   height: calc(var(--grid-row) * var(--tile-size));
-  border: solid #0003 2px;
+  border: solid #eee calc(var(--tile-size) / 2);
   box-sizing: content-box;
 }
 
@@ -42,7 +42,7 @@ div.tile-content {
 /* tous les enfants de "tite-content", càd les calques... */
 div.tile-content > * {
   /* ...doivent se comporter comme des calques dans photoshop ou illustrator */
-  /* c'est à dire, qu'ils doivent faire la même taille que leur parent. */
+  /* c'est à dire, qu'ils doivent faire la même taille que leur parent et se superposer les uns sur les autres. */
   position: absolute;
   top: 0;
   left: 0;
