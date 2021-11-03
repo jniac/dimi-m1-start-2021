@@ -1,7 +1,8 @@
-import * as type1 from './type1.js'
-import './cheat.js'
+import { createType1 } from './type1.js'
+import { createType2 } from './type2.js'
 import { Random } from './utils/random.js'
 import { wait } from './utils/wait.js'
+import './cheat.js'
 
 const random = new Random()
 
@@ -10,7 +11,12 @@ const createTile = () => {
   tile.className = 'tile'
   document.querySelector('main').append(tile)
 
-  tile.append(type1.create())
+  if (random.chance(0.5)) {
+    tile.append(createType1())
+  } else {
+    tile.append(createType2())
+  }
+
   tile.onclick = () => {
     tile.classList.toggle('clicked')
   }
@@ -69,13 +75,9 @@ const suffleTiles = (tiles) => {
   }
 }
 
-const tiles = createGrid(5, 4)
-
-const playableTiles = [...tiles]
-cloneARandomTileContent(playableTiles)
-
-const grid = document.querySelector('main#grid')
-grid.onclick = async () => {
+const gridOnClick = async (playableTiles) => {
+  await wait(0.3)
+  
   const tiles = grid.querySelectorAll('div.tile.clicked')
   if (tiles.length === 2) {
     const [tile1, tile2] = tiles
@@ -88,6 +90,8 @@ grid.onclick = async () => {
       tile2.classList.remove('duplicate')
       tile1.classList.add('played')
       tile2.classList.add('played')
+
+      await wait(0.3)
       if (playableTiles.length < 2) {
         win()
       } else {
@@ -103,15 +107,37 @@ grid.onclick = async () => {
   }
 }
 
+
 const win = async () => {
   await wait(1)
   alert('yeah!')
 }
+
+const main = async () => {
+
+  // On attend ici le chargement des ressources par ./type2.js
+  await wait(0.1)
+
+  const tiles = createGrid(5, 4)
+  
+  const playableTiles = [...tiles]
+  cloneARandomTileContent(playableTiles)
+  
+  const grid = document.querySelector('main#grid')
+  grid.onclick = () => gridOnClick(playableTiles)
+}
+
+main()
+
+
+
 
 window.addEventListener('keydown', event => {
   if (event.code === 'Space') {
     document.body.classList.toggle('cheat')
   }
 })
+
+
 
 
