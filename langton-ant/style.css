@@ -18,9 +18,10 @@ body {
 }
 
 #canvas-wrapper {
-  /* étendre ("grow") le contenu à sa "taille maximale" */
+  /* étendre ("grow") le contenu à la "taille maximale disponible" */
   flex-grow: 1;
   margin: 16px;
+  align-self: center;
 }
 
 #canvas-wrapper canvas {

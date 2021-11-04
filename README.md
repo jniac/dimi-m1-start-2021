@@ -3,7 +3,13 @@
 [Projet de référence](https://github.com/jniac/dimi-m1-start-2021)
 
 ## Learn
+
+### CSS
 [Les notions abordées en CSS sont ici.](./LEARN-CSS.md)
+
+### JS
+Les notions abordées en javascript sont :
+ - [les fonctions](./LEARN-FUNCTIONS.md)
 
 ## Git / Github
 ### Git
