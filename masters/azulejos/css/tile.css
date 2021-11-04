@@ -11,6 +11,8 @@ div.tile-content {
   height: var(--tile-size);
   background-color: white;
   transition: .2s ease-out;
+  overflow: hidden;
+  cursor: pointer;
 }
 
 /* tous les enfants de "tite-content", càd les calques... */
@@ -30,8 +32,13 @@ body.cheat div.tile.duplicate > div.tile-content {
 }
 div.tile.clicked > div.tile-content {
   transform: rotate(10deg);
+  z-index: 1;
+  box-shadow: #0003 0 0 20px;
 }
+
 div.tile.played > div.tile-content {
-  opacity: 0.15;
+  cursor: unset;
+  filter: saturate(0) brightness(120%);
   pointer-events: none;
+  transform: scale(90%);
 }

@@ -16,3 +16,10 @@ export const getRandomColor = () => {
   }
   return '#5bacff'
 }
+
+export const getRandomColorIncludingWhite = (whiteProbability = .2) => {
+  if (Random.chance(whiteProbability)) {
+    return 'white'
+  }
+  return getRandomColor()
+}

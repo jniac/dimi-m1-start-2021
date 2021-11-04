@@ -3,9 +3,8 @@ import { createType2 } from './type2.js'
 import { createType3, initType3 } from './type3.js'
 import { Random } from './utils/random.js'
 import { wait } from './utils/wait.js'
+import './footer.js'
 import './cheat.js'
-
-Random.seed(876789878)
 
 const createTile = () => {
   const tile = document.createElement('div')
@@ -60,6 +59,8 @@ const cloneARandomTileContent = (tiles) => {
   
   tile1.classList.add('duplicate')
   tile2.classList.add('duplicate')
+  
+  return [tile1, tile2]
 }
 
 const tilesAreIdentique = (tile1, tile2) => {
@@ -102,9 +103,8 @@ const gridOnClick = async (playableTiles) => {
       if (playableTiles.length < 2) {
         win()
       } else {
-        cloneARandomTileContent(playableTiles)
-        // suffleTiles(random.uniqueItems(playableTiles, 10))
-        suffleTiles(Random.uniqueItems(playableTiles, 1000))
+        const [tile1, tile2] = cloneARandomTileContent(playableTiles)
+        suffleTiles([tile1, tile2, ...Random.uniqueItems(playableTiles, 8)])
       }
     } else {
       await wait(1)

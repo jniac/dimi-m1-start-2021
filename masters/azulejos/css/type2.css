@@ -21,19 +21,19 @@
   /* background-color: red; */
 }
 .tile-content.type2 .corner.tl {
-  transform: rotate(45deg);
+  transform: rotate(-135deg);
 }
 .tile-content.type2 .corner.tr {
-  transform: rotate(135deg);
-  right: 0;
-}
-.tile-content.type2 .corner.bl {
   transform: rotate(-45deg);
-  bottom: 0;
+  right: 0;
 }
 .tile-content.type2 .corner.br {
-  transform: rotate(-135deg);
+  transform: rotate(45deg);
   right: 0;
+  bottom: 0;
+}
+.tile-content.type2 .corner.bl {
+  transform: rotate(135deg);
   bottom: 0;
 }
 
@@ -49,7 +49,6 @@
   line-height: 24px;
   background-color: red;
   padding: 8px;
-  border-radius: 2px;
 }
 .tile-content.type2 .middle.t {
   transform: translate(-50%, -50%) translateY(calc(var(--radius) * -1));
