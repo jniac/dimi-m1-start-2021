@@ -210,9 +210,9 @@ export class Random {
             // This is because there is no other option from the remaining items (tmp, which contains only one element now).
             // If so, we permute the last item with a random one from the current result (minus one, of course).
             // Doing this way, we are certain that the last item will be anything except the last item from source.
-            index2 = scope.index(array.length - 1)
-            result[index] = result[index2]
-            result[index2] = array[index]
+            index3 = scope.index(array.length - 1)
+            result[index] = result[index3]
+            result[index3] = array[index]
             return result
           }
         }
