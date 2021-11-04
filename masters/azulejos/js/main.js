@@ -39,6 +39,8 @@ const createGrid = (col, row) => {
       const tile = createTile()
       tile.style.left = `${x * 120}px`
       tile.style.top = `${y * 120}px`
+      tile.dataset.tileIndex = tiles.length
+      tile.dataset.initialGridPosition = `${x},${y}` 
       tiles.push(tile)
     }
   }
@@ -72,14 +74,19 @@ const tilesAreIdentique = (tile1, tile2) => {
   )
 }
 
-const suffleTiles = (tiles) => {
-  for (const tile1 of tiles) {
-    const tile2 = Random.item(tiles)
-    const { left, top } = tile2.style
-    tile2.style.left = tile1.style.left
-    tile2.style.top = tile1.style.top
-    tile1.style.left = left
-    tile1.style.top = top
+const shuffleTiles = (tiles) => {
+  tiles = [...new Set(tiles)]
+  
+  const shufflePosition = Random.shuffle(tiles, { forcePermutation: true }).map(tile => {
+    const { left, top } = tile.style
+    return { left, top }
+  })
+
+  for (let i = 0; i < tiles.length; i += 1) {
+    const tile = tiles[i]
+    const { left, top } = shufflePosition[i]
+    tile.style.left = left
+    tile.style.top = top
   }
 }
 
@@ -104,7 +111,7 @@ const gridOnClick = async (playableTiles) => {
         win()
       } else {
         const [tile1, tile2] = cloneARandomTileContent(playableTiles)
-        suffleTiles([tile1, tile2, ...Random.uniqueItems(playableTiles, 8)])
+        shuffleTiles([tile1, tile2, ...Random.uniqueItems(playableTiles, 8)])
       }
     } else {
       await wait(1)

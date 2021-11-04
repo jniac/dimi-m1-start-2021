@@ -25,7 +25,17 @@ export const random = () => {
 }
 
 export class Random {
-  #current = init()
+  #current = NaN
+  #initialSeed = NaN
+
+  constructor(value = NaN) {
+    this.reset(value)
+  }
+
+  reset(value = this.#initialSeed) {
+    this.#initialSeed = value
+    this.#current = init(value)
+  }
  
   static seed(value) {
     current = init(value)
@@ -71,11 +81,11 @@ export class Random {
    * Returns an integer between "min" inclusive and "max" exclusive
    * @param {{ min?:number, max?:number }} param0 
    */
-  static integer({ min = 0, max = 100 }) {
+  static integer({ min = 0, max = 100 } = {}) {
     return Math.floor(min + (max - min) * Random.random())
   }
 
-  integer({ min = 0, max = 100 }) {
+  integer({ min = 0, max = 100 } = {}) {
     return Math.floor(min + (max - min) * this.random())
   }
 
@@ -118,14 +128,14 @@ export class Random {
    * @param {any[]} array 
    * @param {number} count 
    */
-  static uniqueItems(array, count) {
+  static uniqueItems(array, count, scope = Random) {
     if (count > array.length) {
       count = array.length
     }
     const array2 = [...array]
     const items = []
     while (items.length < count) {
-      const index = Random.index(array2.length)
+      const index = scope.index(array2.length)
       const [item] = array2.splice(index, 1)
       items.push(item)
     }
@@ -140,16 +150,43 @@ export class Random {
    * @param {number} count 
    */
   uniqueItems(array, count) {
-    if (count > array.length) {
-      count = array.length
+    return Random.uniqueItems(array, count, this)
+  }
+
+  static shuffle(array, { forcePermutation = false } = {}, scope = Random) {
+
+    const max = array.length
+
+    if (forcePermutation && max > 1) {
+
+      const tmp = array.map((_, i) => i)
+      const result = new Array(max)
+      for (let index = 0; index < max; index += 1) {
+        let index2 = scope.index(tmp.length)
+        let index3 = tmp[index2]
+        while (index3 === index && index < max - 1) {
+          index2 = scope.index(tmp.length)
+          index3 = tmp[index2]
+        }
+        tmp.splice(index2, 1)
+        result[index] = array[index3]
+      }
+      return result
+
+    } else {
+
+      const result = [...array]
+      for (let index = 0; index < max; index += 1) {
+        const index2 = scope.index(max)
+        const tmp = result[index]
+        result[index] = result[index2]
+        result[index2] = tmp
+      }
+      return result
     }
-    const array2 = [...array]
-    const items = []
-    while (items.length < count) {
-      const index = this.index(array2.length)
-      const [item] = array2.splice(index, 1)
-      items.push(item)
-    }
-    return items
+  }
+
+  shuffle(array, { forcePermutation = false } = {}) {
+    return Random.shuffle(array, { forcePermutation }, this)
   }
 }

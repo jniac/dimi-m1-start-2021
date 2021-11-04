@@ -1,6 +1,6 @@
-import * as random from './utils/random.js'
+import { Random } from './utils/random.js'
 
 Object.assign(window, {
-  random,
+  Random,
 })
 
