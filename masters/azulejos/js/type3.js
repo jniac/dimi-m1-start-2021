@@ -1,15 +1,16 @@
 import { getRandomColor } from './colors.js'
 import { UniqueArrayGenerator } from './utils/UniqueArrayGenerator.js'
 
-fetch('./assets/tile-A.svg').then(async response => {
+export const initType3 = async () => {
+  const response = await fetch('./assets/tile-A.svg')
   const svg = await response.text()
-  document.querySelector('#library .type2').innerHTML = svg
-})
+  document.querySelector('#library .type3').innerHTML = svg
+}
 
 const generator = new UniqueArrayGenerator()
 
-export const createType2 = () => {
-  const source = document.querySelector('#library .type2')
+export const createType3 = () => {
+  const source = document.querySelector('#library .type3')
   const clone = source.cloneNode(true)
   const [key, [color1, color2, color3, color4]] = generator.getUniqueKeyAndArray(() => [getRandomColor(), getRandomColor(), getRandomColor(), getRandomColor()])
   clone.dataset.tileKey = key

@@ -1,5 +1,5 @@
 import { createType1 } from './type1.js'
-import { createType2 } from './type2.js'
+import { createType3, initType3 } from './type3.js'
 import { Random } from './utils/random.js'
 import { wait } from './utils/wait.js'
 import './cheat.js'
@@ -14,7 +14,7 @@ const createTile = () => {
   if (random.chance(0.5)) {
     tile.append(createType1())
   } else {
-    tile.append(createType2())
+    tile.append(createType3())
   }
 
   tile.onclick = () => {
@@ -115,8 +115,8 @@ const win = async () => {
 
 const main = async () => {
 
-  // On attend ici le chargement des ressources par ./type2.js
-  await wait(0.1)
+  // On attend ici le chargement des ressources par ./type3.js
+  await initType3()
 
   const tiles = createGrid(5, 4)
   
