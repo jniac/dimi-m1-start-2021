@@ -14,7 +14,7 @@ div.tile-content {
 }
 
 /* tous les enfants de "tite-content", càd les calques... */
-div.tile-content > * {
+div.tile-content > .layer {
   /* ...doivent se comporter comme des calques dans photoshop ou illustrator */
   /* c'est à dire, qu'ils doivent faire la même taille que leur parent et se superposer les uns sur les autres. */
   position: absolute;

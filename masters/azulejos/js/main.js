@@ -1,19 +1,25 @@
 import { createType1 } from './type1.js'
+import { createType2 } from './type2.js'
 import { createType3, initType3 } from './type3.js'
 import { Random } from './utils/random.js'
 import { wait } from './utils/wait.js'
 import './cheat.js'
 
-const random = new Random()
+Random.seed(876789878)
 
 const createTile = () => {
   const tile = document.createElement('div')
   tile.className = 'tile'
   document.querySelector('main').append(tile)
 
-  if (random.chance(0.5)) {
+  const r = Random.integer({ max: 3 })
+  if (r === 0) {
     tile.append(createType1())
-  } else {
+  } else 
+  if (r === 1) {
+    tile.append(createType2())
+  } else 
+  if (r === 2) {
     tile.append(createType3())
   }
 
@@ -41,10 +47,11 @@ const createGrid = (col, row) => {
 }
 
 const cloneARandomTileContent = (tiles) => {
-  const index1 = random.index(tiles.length)
-  let index2 = random.index(tiles.length)
+  const index1 = Random.index(tiles.length)
+  let index2 = Random.index(tiles.length)
+  // while loop to avoid index2 === index1
   while (index2 === index1) {
-    index2 = random.index(tiles.length)
+    index2 = Random.index(tiles.length)
   }
   const tile1 = tiles[index1]
   const tile2 = tiles[index2]
@@ -66,7 +73,7 @@ const tilesAreIdentique = (tile1, tile2) => {
 
 const suffleTiles = (tiles) => {
   for (const tile1 of tiles) {
-    const tile2 = random.item(tiles)
+    const tile2 = Random.item(tiles)
     const { left, top } = tile2.style
     tile2.style.left = tile1.style.left
     tile2.style.top = tile1.style.top
@@ -97,7 +104,7 @@ const gridOnClick = async (playableTiles) => {
       } else {
         cloneARandomTileContent(playableTiles)
         // suffleTiles(random.uniqueItems(playableTiles, 10))
-        suffleTiles(random.uniqueItems(playableTiles, 1000))
+        suffleTiles(Random.uniqueItems(playableTiles, 1000))
       }
     } else {
       await wait(1)

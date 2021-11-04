@@ -1,11 +1,9 @@
 import { Random } from './utils/random.js'
 
-const random = new Random()
-
 export const getRandomColor = () => {
-  const r = random.random()
+  const r = Random.random()
   if (r < 0.5) {
-    if (random.random() < 0.5) {
+    if (Random.chance(0.5)) {
       return '#b92e15'
     }
     return 'tomato'
