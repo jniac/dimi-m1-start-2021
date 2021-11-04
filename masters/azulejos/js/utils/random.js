@@ -47,6 +47,20 @@ export class Random {
     return this
   }
 
+  static next(count = 1) {
+    while (count--) {
+      current = next(current)
+    }
+    return Random
+  }
+  
+  next(count = 1) {
+    while (count--) {
+      this.#current = next(this.#current)
+    }
+    return this
+  }
+
   static random() {
     current = next(current)
     return toRange01(current)
@@ -153,37 +167,69 @@ export class Random {
     return Random.uniqueItems(array, count, this)
   }
 
+  /**
+   * From a given array, returns an array with the same element, but where the order has been randomized.
+   * 
+   * Note: the `forcePermutation` option allowsto forbid an item to stay at the same index (what remains possible with true random).
+   * @param {any[]} array 
+   * @param {{ forcePermutation?: boolean }} param1 
+   * @param {*} scope 
+   */
   static shuffle(array, { forcePermutation = false } = {}, scope = Random) {
 
     const max = array.length
 
-    if (forcePermutation && max > 1) {
+    if (max === 0) {
+      return []
+    }
 
+    if (max === 1) {
+      return [array[0]]
+    }
+
+    if (forcePermutation && max === 2) {
+      const [item0, item1] = array
+      return [item1, item0]
+    }
+    
+    if (forcePermutation && max > 2) {
       const tmp = array.map((_, i) => i)
       const result = new Array(max)
       for (let index = 0; index < max; index += 1) {
-        let index2 = scope.index(tmp.length)
+        const length2 = tmp.length
+        let index2 = scope.index(length2)
         let index3 = tmp[index2]
-        while (index3 === index && index < max - 1) {
-          index2 = scope.index(tmp.length)
-          index3 = tmp[index2]
+        while (index3 === index) {
+          if (length2 > 1) {
+            index2 = scope.index(length2)
+            index3 = tmp[index2]
+          } else {
+            // NOTE: read it carefully, this is non-trivial
+            // What is the problem here?
+            // The last item will be the same in the result than in source (array).
+            // This is because there is no other option from the remaining items (tmp, which contains only one element now).
+            // If so, we permute the last item with a random one from the current result (minus one, of course).
+            // Doing this way, we are certain that the last item will be anything except the last item from source.
+            index2 = scope.index(array.length - 1)
+            result[index] = result[index2]
+            result[index2] = array[index]
+            return result
+          }
         }
         tmp.splice(index2, 1)
         result[index] = array[index3]
       }
       return result
-
-    } else {
-
-      const result = [...array]
-      for (let index = 0; index < max; index += 1) {
-        const index2 = scope.index(max)
-        const tmp = result[index]
-        result[index] = result[index2]
-        result[index2] = tmp
-      }
-      return result
     }
+
+    const result = [...array]
+    for (let index = 0; index < max; index += 1) {
+      const index2 = scope.index(max)
+      const tmp = result[index]
+      result[index] = result[index2]
+      result[index2] = tmp
+    }
+    return result
   }
 
   shuffle(array, { forcePermutation = false } = {}) {
