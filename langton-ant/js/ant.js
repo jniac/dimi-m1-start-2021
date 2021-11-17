@@ -9,8 +9,6 @@ let x = 20
 let y = 20
 let orientation = RIGHT
 
-setPixel(x, y, '#fc0')
-
 const moveForward = () => {
   if (orientation === RIGHT) {
     x = x + 1
@@ -41,6 +39,13 @@ const move = () => {
   
   const color = getPixel(x, y)
 
+  // Algorithme de la fourmi de langton :
+  // Pour une couleur précise (ici le blanc "#ffffff") :
+  //   tourner à gauche ("turnLeft()")
+  //   et peindre le pixel en un couleur sympa ("turquoise")
+  // sinon :
+  //   tourner à droite ("turnRight()")
+  //   et remettre le pixel en blanc ("#ffffff")
   if (color === '#ffffff') {
     turnLeft()    
     setPixel(x, y, 'turquoise')
