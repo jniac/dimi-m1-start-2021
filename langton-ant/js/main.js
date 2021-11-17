@@ -1,10 +1,8 @@
-import { resizeCanvas, setPixel } from './utils/canvas.js'
-// import './ant.js'
-
-const width = 32
-const height = 32
+import { resizeCanvas } from './utils/canvas.js'
+import * as ant from './ant.js'
 
 resizeCanvas(32, 32)
 
-setPixel(10, 10, 'red')
-import('./ant.js')
+document.querySelector('button#move').onclick = () => {
+  ant.move()
+}

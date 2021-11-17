@@ -1,4 +1,4 @@
-import { setPixel } from './utils/canvas.js'
+import { getPixel, setPixel } from './utils/canvas.js'
 
 const RIGHT = 0
 const BOTTOM = 1
@@ -38,39 +38,24 @@ const turnLeft = () => {
 }
 
 const move = () => {
-  setPixel(x, y, 'turquoise')
+  
+  const color = getPixel(x, y)
+
+  if (color === '#ffffff') {
+    turnLeft()    
+    setPixel(x, y, 'turquoise')
+  } else {
+    turnRight()
+    setPixel(x, y, '#ffffff')
+  }
+  
   moveForward()
 }
 
-move()
-move()
-turnLeft()
-move()
-move()
-move()
-move()
-turnRight()
-move()
-turnLeft()
-move()
-turnRight()
-move()
-turnLeft()
-move()
-turnLeft()
-move()
-turnRight()
-move()
-turnLeft()
-move()
-turnRight()
-move()
-turnLeft()
-move()
-turnLeft()
-move()
-turnRight()
-move()
-turnLeft()
-move()
+export {
+  x,
+  y,
+  orientation,
+  move,
+}
 
