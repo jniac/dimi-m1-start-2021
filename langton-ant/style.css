@@ -27,6 +27,7 @@ body {
 #canvas-wrapper canvas {
   height: 100%;
   background-color: #fff;
+  image-rendering: pixelated;
 }
 
 #canvas-wrapper img {

@@ -6,6 +6,7 @@ context.fillRect(0, 0, canvas.width, canvas.height)
 
 export const setPixel = (x, y, color) => {
 
+  console.log(x, y, color)
   context.fillStyle = color
   context.fillRect(x, y, 1, 1)
 }
