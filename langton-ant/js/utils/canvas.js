@@ -1,8 +1,14 @@
 export const canvas = document.querySelector('canvas')
 export const context = canvas.getContext('2d')
 
-context.fillStyle = '#ffffff'
-context.fillRect(0, 0, canvas.width, canvas.height)
+export const resizeCanvas = (width, height) => {
+  canvas.width = width
+  canvas.height = height
+
+  // Important: repeindre en blanc le canvas après l'avoir redimensionné.
+  context.fillStyle = '#ffffff'
+  context.fillRect(0, 0, canvas.width, canvas.height)
+}
 
 export const setPixel = (x, y, color) => {
 
